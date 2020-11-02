@@ -1,10 +1,13 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class sphere_legos : MonoBehaviour
 {
     public Material mat;
+
+    public GameObject prefab;
 
     public int width, height, depth;
     List<Vector3> centres = new List<Vector3>();
@@ -24,10 +27,13 @@ public class sphere_legos : MonoBehaviour
 
         
         // centres.Add(new Vector3(12, 12, 12));
-        centres.Add(new Vector3(15, 15, 15));
+        //centres.Add(new Vector3(15, 15, 15));
         centres.Add(new Vector3(24, 18, 15));
 
-        draw_diff(width, height, depth, new Vector3(12, 12, 12), centres, 10);
+        //draw_diff(width, height, depth, new Vector3(12, 12, 12), centres, 10);
+        //drawLegos(width, height, depth, centres, 10);
+
+        drawBlock(5, 5, 5);
 
         Mesh msh = new Mesh();
         
@@ -43,8 +49,7 @@ public class sphere_legos : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // drawLegos(width, height, depth,  centres, 10);
-
+        sculpt();
     }
 
     public void drawLegos(int w, int h, int d, List<Vector3> c, int r){
@@ -181,15 +186,74 @@ public class sphere_legos : MonoBehaviour
 
 
     }
-    private void OnDrawGizmos()
+
+    private void drawBlock(int w, int h, int d)
     {
-        if (vertices == null) return;
-        // DrawSphere();
-        Gizmos.color = Color.white;
-        foreach (var point in vertices)
+        for (int i = 0; i < h; i++)
         {
-            Gizmos.DrawCube(point, new Vector3(0.1f, 0.1f, 0.1f));
+            for (int j = 0; j < w; j++)
+            {
+                for (int k = 0; k < d; k++)
+                {
+                    //GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                    //cube.transform.position = new Vector3(i, j, k);
+                    GameObject cube = Instantiate(prefab, new Vector3(i, j, k), Quaternion.identity);
+                    cube.GetComponent<cubeweight>().weight = 25;
+                    cube.layer = 9;
+
+                }
+
+
+            }
         }
+
     }
+
+    private void sculpt()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out hit, 100f, 1 << 9))
+            {
+                if (hit.transform)
+                {
+                    //hit.transform.gameObject.SetActive(false);
+                    hit.transform.GetComponent<cubeweight>().weight -= 10;
+                    hit.transform.gameObject.layer = 8;
+                }
+            }
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out hit, 100f, 1 << 8))
+            {
+                if (hit.transform)
+                {
+                    hit.transform.GetComponent<cubeweight>().weight += 10;
+                    hit.transform.gameObject.layer = 9;
+                }
+            }
+        }
+
+
+
+    }
+    //private void OnDrawGizmos()
+    //{
+    //    if (vertices == null) return;
+    //    // DrawSphere();
+    //    Gizmos.color = Color.white;
+    //    foreach (var point in vertices)
+    //    {
+    //        Gizmos.DrawCube(point, new Vector3(0.1f, 0.1f, 0.1f));
+    //    }
+    //}
 
 }
