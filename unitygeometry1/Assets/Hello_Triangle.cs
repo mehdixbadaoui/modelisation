@@ -29,9 +29,9 @@ public class Hello_Triangle : MonoBehaviour
 
         // cylindre(new Vector3(0, 0, 0), 3, 60, 10);
 
-        cone(new Vector3(0, 0, 0), 3, 20, 5);
+        //cone(new Vector3(0, 0, 0), 3, 20, 5);
 
-        // sphere(new Vector3(0, 0, 0), 4, 8);
+        sphere(new Vector3(0, 0, 0), 4, 8);
 
         Mesh msh = new Mesh();
 
@@ -213,8 +213,8 @@ public class Hello_Triangle : MonoBehaviour
         int tri = start;
 
         triangles[0] = 0;
-        triangles[1] = 2;
-        triangles[2] = 1;
+        triangles[1] = 1;
+        triangles[2] = 2;
 
         // for (int i = 1; i < edges; i++)
         // {

@@ -64,8 +64,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Hello_Triangle.cs" />
+    <Compile Include="Assets\Hermite_Curve.cs" />
     <Compile Include="Assets\buddah.cs" />
     <Compile Include="Assets\cubeweight.cs" />
+    <Compile Include="Assets\hermit.cs" />
     <Compile Include="Assets\sphere_legos.cs" />
     <None Include="Assets\Nouveau document texte.txt" />
     <Reference Include="UnityEngine">

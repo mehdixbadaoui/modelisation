@@ -25,15 +25,16 @@ public class sphere_legos : MonoBehaviour
         gameObject.AddComponent<MeshFilter>();
         gameObject.AddComponent<MeshRenderer>();
 
-        
+
         // centres.Add(new Vector3(12, 12, 12));
-        //centres.Add(new Vector3(15, 15, 15));
+        centres.Add(new Vector3(15, 15, 15));
         centres.Add(new Vector3(24, 18, 15));
 
         //draw_diff(width, height, depth, new Vector3(12, 12, 12), centres, 10);
+        draw_intersec(width, height, depth, /*new Vector3(12, 12, 12),*/ centres, 10);
         //drawLegos(width, height, depth, centres, 10);
 
-        drawBlock(5, 5, 5);
+        //drawBlock(5, 5, 5);
 
         Mesh msh = new Mesh();
         
