@@ -8,10 +8,12 @@ public class bezier : MonoBehaviour
 {
     public Color color = Color.white;
     public float width = 0.2f;
-    public int numberOfPoints = 4;
+    public int numberOfPoints;
     LineRenderer lineRenderer;
 
     Vector3 p0, p1, p2, p3;
+
+    private Vector3 tomove = Vector3.zero;
 
     // Start is called before the first frame update
     void Start()
@@ -26,29 +28,49 @@ public class bezier : MonoBehaviour
         p2 = new Vector3(1, 1, 0);
         p3 = new Vector3(2, -2, 0);
 
-        
 
     }
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Keypad1)) movepoint(p0);
-        else if (Input.GetKey(KeyCode.Keypad2)) movepoint(p1);
-        else if (Input.GetKey(KeyCode.Keypad3)) movepoint(p2);
-        else if (Input.GetKey(KeyCode.Keypad4)) movepoint(p3);
 
-        curve(4, p0, p1, p2, p3);
+        if (Input.GetKey(KeyCode.Keypad1)) tomove = p0;
+        if (Input.GetKey(KeyCode.Keypad2)) tomove = p1;
+        if (Input.GetKey(KeyCode.Keypad3)) tomove = p2;
+        if (Input.GetKey(KeyCode.Keypad4)) tomove = p3;
 
-        Debug.Log(p0);
+        //Debug.Log(tomove);
+
+        if (tomove == p0)
+        {
+            p0 = movepoint(p0);
+            tomove = p0;
+        }
+        if (tomove == p1)
+        {
+            p1 = movepoint(p1);
+            tomove = p1;
+        }
+        if (tomove == p2)
+        {
+            p2 = movepoint(p2);
+            tomove = p2;
+        }
+        if (tomove == p3)
+        {
+            p3 = movepoint(p3);
+            tomove = p3;
+        }
+
+        curve(p0, p1, p2, p3);
+
 
     }
 
-    private void curve(int n, Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3)
+    private void curve(Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3)
     {
-        lineRenderer.startColor = color;
-        lineRenderer.endColor = color;
-        lineRenderer.startWidth = width;
-        lineRenderer.endWidth = width;
+        //lineRenderer.startColor = color;
+        //lineRenderer.endColor = color;
 
         if (numberOfPoints > 0)
         {
@@ -87,13 +109,12 @@ public class bezier : MonoBehaviour
         else return fact(n - 1);
     }
 
-    void movepoint(Vector3 point)
+    Vector3 movepoint(Vector3 point)
     {
         float v = Input.GetAxis("Vertical");
         float h = Input.GetAxis("Horizontal");
 
-        point = new Vector3(0, 0, 0);
-        //point += new Vector3(v, h, 0) * 100f * Time.deltaTime;
+        return point + new Vector3(h, v, 0) * 10f * Time.deltaTime;
     }
 }
 

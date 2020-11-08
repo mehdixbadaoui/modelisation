@@ -27,14 +27,12 @@ public class Hermite_Curve : MonoBehaviour
 
 		hermite(s0, st, e0, et);
 
-		//bezier(10, p0, p1, p2, p3);
 
 	}
 
 	void Update()
 	{
 
-		//hermite(s0, st, e0, et);
 
 	}
 

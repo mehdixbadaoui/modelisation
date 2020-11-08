@@ -63,13 +63,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Hello_Triangle.cs" />
-    <Compile Include="Assets\Hermite_Curve.cs" />
-    <Compile Include="Assets\bezier.cs" />
-    <Compile Include="Assets\buddah.cs" />
-    <Compile Include="Assets\cubeweight.cs" />
-    <Compile Include="Assets\sphere_legos.cs" />
-    <None Include="Assets\Nouveau document texte.txt" />
+    <Compile Include="Assets\tp1\Hello_Triangle.cs" />
+    <Compile Include="Assets\tp2\buddah.cs" />
+    <Compile Include="Assets\tp3\cubeweight.cs" />
+    <Compile Include="Assets\tp3\sphere_legos.cs" />
+    <Compile Include="Assets\tp7\Hermite_Curve.cs" />
+    <Compile Include="Assets\tp7\LR.cs" />
+    <Compile Include="Assets\tp7\bezier.cs" />
+    <None Include="Assets\tp2\Nouveau document texte.txt" />
     <Reference Include="UnityEngine">
       <HintPath>C:/2019.4.13f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
