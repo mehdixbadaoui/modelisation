@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
 using UnityEngine;
 
 [ExecuteInEditMode, RequireComponent(typeof(LineRenderer))]
@@ -10,6 +11,8 @@ public class bezier : MonoBehaviour
     public float width = 0.2f;
     public int numberOfPoints;
     LineRenderer lineRenderer;
+
+    public GameObject circle;
 
     Vector3 p0, p1, p2, p3;
 
@@ -34,32 +37,64 @@ public class bezier : MonoBehaviour
     private void Update()
     {
 
-        if (Input.GetKey(KeyCode.Keypad1)) tomove = p0;
-        if (Input.GetKey(KeyCode.Keypad2)) tomove = p1;
-        if (Input.GetKey(KeyCode.Keypad3)) tomove = p2;
-        if (Input.GetKey(KeyCode.Keypad4)) tomove = p3;
+        if (Input.GetKey(KeyCode.Keypad1))
+        {
+            tomove = p0;
+            updateCircle();
+            circle.GetComponent<SpriteRenderer>().color = Color.red;
+        }
 
-        //Debug.Log(tomove);
+        if (Input.GetKey(KeyCode.Keypad2))
+        {
+            tomove = p1;
+            updateCircle();
+            circle.GetComponent<SpriteRenderer>().color = Color.red;
+        }
+
+        if (Input.GetKey(KeyCode.Keypad3))
+        {
+            tomove = p2;
+            updateCircle();
+            circle.GetComponent<SpriteRenderer>().color = Color.red;
+        }
+
+        if (Input.GetKey(KeyCode.Keypad4))
+        {
+            tomove = p3;
+            updateCircle();
+            circle.GetComponent<SpriteRenderer>().color = Color.red;
+        }
+        if (Input.GetKey(KeyCode.Keypad5))
+        {
+            tomove = Vector3.zero;
+            updateCircle();
+            circle.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 0);
+        }
+
 
         if (tomove == p0)
         {
             p0 = movepoint(p0);
             tomove = p0;
+            updateCircle();
         }
-        if (tomove == p1)
+        else if (tomove == p1)
         {
             p1 = movepoint(p1);
             tomove = p1;
+            updateCircle();
         }
-        if (tomove == p2)
+        else if (tomove == p2)
         {
             p2 = movepoint(p2);
             tomove = p2;
+            updateCircle();
         }
-        if (tomove == p3)
+        else if (tomove == p3)
         {
             p3 = movepoint(p3);
             tomove = p3;
+            updateCircle();
         }
 
         curve(p0, p1, p2, p3);
@@ -115,6 +150,12 @@ public class bezier : MonoBehaviour
         float h = Input.GetAxis("Horizontal");
 
         return point + new Vector3(h, v, 0) * 10f * Time.deltaTime;
+    }
+
+    private void updateCircle()
+    {
+        Vector3 vec = new Vector3(tomove.x, tomove.y, -.2f);
+        circle.transform.position = vec;
     }
 }
 
