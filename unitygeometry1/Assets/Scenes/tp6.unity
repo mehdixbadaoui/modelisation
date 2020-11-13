@@ -121,6 +121,66 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &444190861
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 444190862}
+  m_Layer: 0
+  m_Name: father
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &444190862
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 444190861}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.095261, y: 2.345851, z: -1.8619808}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &461676006
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 461676007}
+  m_Layer: 0
+  m_Name: GameObject (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &461676007
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461676006}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.85, y: 1.67, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1893323165}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &732599199
 GameObject:
   m_ObjectHideFlags: 0
@@ -416,7 +476,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4d0fd37f6ee94d4c98b94fc8d1e8fa8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  father: {fileID: 444190861}
   times: 0
+  sub: 0
 --- !u!120 &1893323164
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -461,11 +523,6 @@ LineRenderer:
   - {x: 1.8, y: -1.16, z: 0}
   - {x: -2.84, y: -2.34, z: 0}
   - {x: 1.85, y: 1.67, z: 0}
-  - {x: 1.8, y: -1.16, z: 0}
-  - {x: -2.84, y: -2.34, z: 0}
-  - {x: 1.85, y: 1.67, z: 0}
-  - {x: 1.8, y: -1.16, z: 0}
-  - {x: -2.84, y: -2.34, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -473,8 +530,8 @@ LineRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
-        value: 0.49999917
+        time: 0.03672409
+        value: 0.09872353
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -535,6 +592,7 @@ Transform:
   - {fileID: 1781167747}
   - {fileID: 1458213924}
   - {fileID: 1517317686}
+  - {fileID: 461676007}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
