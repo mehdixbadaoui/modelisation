@@ -30,12 +30,6 @@ public class Hermite_Curve : MonoBehaviour
 
 	}
 
-	void Update()
-	{
-
-
-	}
-
 	private void hermite(Vector3 p0, Vector3 p1, Vector3 m0, Vector3 m1)
 	{
 		// check parameters and components
@@ -71,18 +65,4 @@ public class Hermite_Curve : MonoBehaviour
 
 
 	}
-
-    private void bezier(int n, Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3)
-    {
-		lineRenderer.SetPosition(1, p0);
-		lineRenderer.SetPosition(2, p1);
-		lineRenderer.SetPosition(3, p2);
-		lineRenderer.SetPosition(4, p3);
-        Vector3 pos;
-        //for (int i = 0; i < n; i++)
-        //{
-        //    pos =
-
-        //}
-    }
 }

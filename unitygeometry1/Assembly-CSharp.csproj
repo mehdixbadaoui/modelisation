@@ -63,6 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Chaikin.cs" />
     <Compile Include="Assets\tp1\Hello_Triangle.cs" />
     <Compile Include="Assets\tp2\buddah.cs" />
     <Compile Include="Assets\tp3\cubeweight.cs" />

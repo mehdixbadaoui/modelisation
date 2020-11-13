@@ -104,8 +104,6 @@ public class bezier : MonoBehaviour
 
     private void curve(Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3)
     {
-        //lineRenderer.startColor = color;
-        //lineRenderer.endColor = color;
 
         if (numberOfPoints > 0)
         {
