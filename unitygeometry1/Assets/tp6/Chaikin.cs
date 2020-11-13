@@ -58,21 +58,27 @@ public class Chaikin : MonoBehaviour
             go2.transform.position = t.GetChild(i + 1).transform.position * 3 / 4
                                     + t.GetChild(i).transform.position / 4;
 
-            //go1.transform.parent = father.transform;
-            //go2.transform.parent = father.transform;
-
             newpoints.Add(go1.transform);
             newpoints.Add(go2.transform);
 
         }
 
+        GameObject golast = new GameObject();
+        golast.transform.position = t.GetChild(transform.childCount - 1).transform.position * 3 / 4
+                                + t.GetChild(1).transform.position / 4;
+        GameObject goblast = new GameObject();
+        goblast.transform.position = t.GetChild(1).transform.position * 3 / 4
+                                + t.GetChild(transform.childCount - 1).transform.position / 4;
 
-        linerenderer.positionCount = newpoints.Count;
+        newpoints.Add(golast.transform);
+        newpoints.Add(goblast.transform);
+
+        linerenderer.positionCount = newpoints.Count + 1;
         for (int i = 0; i < newpoints.Count;  i++)
         {
             linerenderer.SetPosition(i, newpoints[i].position);
         }
-
+        linerenderer.SetPosition(newpoints.Count, newpoints[0].position);
         foreach (Transform child in transform)
         {
             GameObject.Destroy(child.gameObject);
