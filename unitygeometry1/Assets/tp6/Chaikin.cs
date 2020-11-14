@@ -64,24 +64,19 @@ public class Chaikin : MonoBehaviour
         }
 
         GameObject golast = new GameObject();
-        golast.transform.position = t.GetChild(transform.childCount - 1).transform.position * 3 / 4
-                                + t.GetChild(1).transform.position / 4;
-        GameObject goblast = new GameObject();
-        goblast.transform.position = t.GetChild(1).transform.position * 3 / 4
-                                + t.GetChild(transform.childCount - 1).transform.position / 4;
+        golast.transform.position = newpoints[0].transform.position;
+
 
         newpoints.Add(golast.transform);
-        newpoints.Add(goblast.transform);
 
-        linerenderer.positionCount = newpoints.Count + 1;
-        for (int i = 0; i < newpoints.Count;  i++)
+        linerenderer.positionCount = newpoints.Count;
+        for (int i = 0; i < linerenderer.positionCount;  i++)
         {
             linerenderer.SetPosition(i, newpoints[i].position);
         }
-        linerenderer.SetPosition(newpoints.Count, newpoints[0].position);
         foreach (Transform child in transform)
         {
-            GameObject.Destroy(child.gameObject);
+            Destroy(child.gameObject);
         }
 
         foreach (Transform t in newpoints)
@@ -90,7 +85,6 @@ public class Chaikin : MonoBehaviour
         }
 
         newpoints = new List<Transform>();
-        //linerenderer.SetPosition(linerenderer.positionCount - 1, newpoints[0].position);
         times++;
         sub = false;
     }
