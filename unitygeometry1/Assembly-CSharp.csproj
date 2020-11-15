@@ -64,10 +64,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\tp1\Hello_Triangle.cs" />
+    <Compile Include="Assets\tp1\sphere.cs" />
     <Compile Include="Assets\tp2\buddah.cs" />
     <Compile Include="Assets\tp3\cubeweight.cs" />
     <Compile Include="Assets\tp3\sphere_legos.cs" />
     <Compile Include="Assets\tp6\Chaikin.cs" />
+    <Compile Include="Assets\tp6_bis\cell_collapse.cs" />
     <Compile Include="Assets\tp7\Hermite_Curve.cs" />
     <Compile Include="Assets\tp7\LR.cs" />
     <Compile Include="Assets\tp7\bezier.cs" />

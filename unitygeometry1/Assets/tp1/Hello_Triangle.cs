@@ -31,7 +31,8 @@ public class Hello_Triangle : MonoBehaviour
 
         //cone(new Vector3(0, 0, 0), 3, 20, 5);
 
-        sphere(new Vector3(0, 0, 0), 4, 8);
+        //sphere(new Vector3(0, 0, 0), 4, 8);
+        sphere_mat(rayon, nparallele, nmeridien, ntronc);
 
         Mesh msh = new Mesh();
 
@@ -274,76 +275,77 @@ public class Hello_Triangle : MonoBehaviour
     }
 
 
-    // void sphere_mat(int r, int p, int m, int t){
+    void sphere_mat(int r, int p, int m, int t)
+    {
 
-    //     const float PI = 3.1415926f;
-    //     int rayon = r, nparallele = p, nmeridien = m, ntronc = t;
-    //     int[] triangles;
-    //     Vector3[] vertices;
-    //     Material mat;
+        const float PI = 3.1415926f;
+        int rayon = r, nparallele = p, nmeridien = m, ntronc = t;
+        int[] triangles;
+        Vector3[] vertices;
+        Material mat;
 
-    //     ntronc = nmeridien - ntronc;
-    //     // Création des structures de données qui accueilleront sommets et  triangles  // Remplissage de la structure sommet 
+        ntronc = nmeridien - ntronc;
+        // Création des structures de données qui accueilleront sommets et  triangles  // Remplissage de la structure sommet 
 
-    //     vertices = new Vector3[(ntronc + 1) *(nparallele+1)+1];
-    //     triangles = new int[(ntronc *nparallele *2 + 2*nparallele) * 3];
-
-
-    //     int index = 0;
-    //     vertices[(ntronc + 1) * (nparallele + 1)] = new Vector3(0, 0, 0); 
-    //     for (int i = 0; i <= nparallele; i++)
-    //     {
-    //         float phi = -PI / 2 + i * PI / nparallele;
-    //         for(int j = 0; j<= ntronc; j++)
-    //         {
-    //             float teta = j * 2 * PI / nmeridien;
-                
-    //             float x = Mathf.Cos(teta) * Mathf.Cos(phi);
-    //             float y = Mathf.Sin(teta) * Mathf.Cos(phi);
-    //             float z = Mathf.Sin(phi);
-
-    //             vertices[index] = new Vector3(x, y ,z);
-    //             index++;
-    //         }
-    //     }
-
-    //     int k = 0;
-    //     for (int j = 0; j < nparallele; j++)
-    //     {
-    //         int r1 = j * (ntronc + 1);
-    //         int r2 = (j+1) * (ntronc + 1);
-    //         for (int i = 0; i < ntronc; i++)
-    //         {
-    //             triangles[k] = r1 + i;
-    //             triangles[k+1] = r2 + i +1;
-    //             triangles[k+2] = r2 + i;
-
-    //             triangles[k+3] = r1 + i;
-    //             triangles[k+4] = r1 + i + 1;
-    //             triangles[k+5] = r2 + i + 1;
-
-    //             k += 6;
-    //         }
-    //     }
-
-    //     for (int i =0;i<nparallele;i++)
-    //     {
-           
-    //         triangles[k++] = (i * (ntronc + 1)) + ntronc + 1;
-    //         triangles[k++] = ((ntronc + 1) * (nparallele + 1)); // ok
-    //         triangles[k++] = (i * (ntronc + 1));
-
-    //         triangles[k++] = ((i * (ntronc + 1))) + ntronc;
-    //         triangles[k++] = ((ntronc + 1) * (nparallele + 1)); // ok
-    //         triangles[k++] = ((i * (ntronc + 1)) + ntronc + 1) + ntronc;
+        vertices = new Vector3[(ntronc + 1) * (nparallele + 1) + 1];
+        triangles = new int[(ntronc * nparallele * 2 + 2 * nparallele) * 3];
 
 
-         
+        int index = 0;
+        vertices[(ntronc + 1) * (nparallele + 1)] = new Vector3(0, 0, 0);
+        for (int i = 0; i <= nparallele; i++)
+        {
+            float phi = -PI / 2 + i * PI / nparallele;
+            for (int j = 0; j <= ntronc; j++)
+            {
+                float teta = j * 2 * PI / nmeridien;
 
-    //     }
+                float x = Mathf.Cos(teta) * Mathf.Cos(phi);
+                float y = Mathf.Sin(teta) * Mathf.Cos(phi);
+                float z = Mathf.Sin(phi);
+
+                vertices[index] = new Vector3(x, y, z);
+                index++;
+            }
+        }
+
+        int k = 0;
+        for (int j = 0; j < nparallele; j++)
+        {
+            int r1 = j * (ntronc + 1);
+            int r2 = (j + 1) * (ntronc + 1);
+            for (int i = 0; i < ntronc; i++)
+            {
+                triangles[k] = r1 + i;
+                triangles[k + 1] = r2 + i + 1;
+                triangles[k + 2] = r2 + i;
+
+                triangles[k + 3] = r1 + i;
+                triangles[k + 4] = r1 + i + 1;
+                triangles[k + 5] = r2 + i + 1;
+
+                k += 6;
+            }
+        }
+
+        for (int i = 0; i < nparallele; i++)
+        {
+
+            triangles[k++] = (i * (ntronc + 1)) + ntronc + 1;
+            triangles[k++] = ((ntronc + 1) * (nparallele + 1)); // ok
+            triangles[k++] = (i * (ntronc + 1));
+
+            triangles[k++] = ((i * (ntronc + 1))) + ntronc;
+            triangles[k++] = ((ntronc + 1) * (nparallele + 1)); // ok
+            triangles[k++] = ((i * (ntronc + 1)) + ntronc + 1) + ntronc;
 
 
-    // }
+
+
+        }
+
+
+    }
 
     private void OnDrawGizmos()
     {
