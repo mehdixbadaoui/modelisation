@@ -1,7 +1,17 @@
 ﻿using System;
+using System.Linq;
 using UnityEngine;
+using System.Collections.Generic;
 using System.Globalization;
 
+
+public static class Utils
+{
+    public static bool IsAny<T>(this IEnumerable<T> data)
+    {
+        return data != null && data.Any();
+    }
+}
 
 public class cell_collapse : MonoBehaviour
 {
@@ -10,11 +20,18 @@ public class cell_collapse : MonoBehaviour
     Vector3[] vertices;
     int[] triangles;
     Mesh msh;
+    public int grid_size;
+
+    private Dictionary <Vector3, Vector3> vec_cell;
 
     private void Start()
     {
-        string path = @"F:\School\Modelisation\modelisation\cube.off.txt";
+        string path = @"F:\School\Modelisation\modelisation\bunny.off.txt";
         draw(path);
+        vec_cell = new Dictionary<Vector3, Vector3>();
+        grid_size = 32;
+        grid();
+        
     }
     void draw(String path)
     {
@@ -29,7 +46,6 @@ public class cell_collapse : MonoBehaviour
         vertices = new Vector3[Int32.Parse(vals[1])];
         triangles = new int[Int32.Parse(vals[2]) * 3];
 
-        Debug.Log($"{triangles.Length} triangles");
         int inc = 4;
         int erreurs = 0;
 
@@ -61,14 +77,41 @@ public class cell_collapse : MonoBehaviour
 
         }
 
-        msh = new Mesh();
+        //msh = new Mesh();
 
-        msh.vertices = vertices;
-        msh.triangles = triangles;
+        //msh.vertices = vertices;
+        //msh.triangles = triangles;
 
-        gameObject.GetComponent<MeshFilter>().mesh = msh;
-        gameObject.GetComponent<MeshRenderer>().material = mat;
+        //gameObject.GetComponent<MeshFilter>().mesh = msh;
+        //gameObject.GetComponent<MeshRenderer>().material = mat;
 
+
+    }
+
+    void grid()
+    {
+        foreach (Vector3 vec in vertices)
+        {
+            vec_cell.Add(vec, new Vector3(vec.x % grid_size, vec.y % grid_size, vec.z % grid_size));
+        }
+
+        IEnumerable<Vector3> matches = vec_cell.Where(o => o.Value == new Vector3(10, 10, 10))
+                  .Select(o => o.Key);
+
+
+        int count = 0;
+        Vector3 avg = Vector3.zero;
+
+        Debug.Log(matches != null /*&& matches.Any()*/);
+        foreach (Vector3 match in matches)
+        {
+            Debug.Log(match);
+
+            avg += match;
+            count++;
+        }
+        avg /= count;
+        Debug.Log(count);
 
     }
 

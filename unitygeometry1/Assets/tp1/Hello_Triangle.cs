@@ -8,12 +8,8 @@ public class Hello_Triangle : MonoBehaviour
 
     public Material mat;
 
-    // int yrows = 3;
-    // int xcols = 4;
-    public int rayon, nparallele, nmeridien,ntronc;
-
-        Vector3[] vertices;
-        int[] triangles;
+    Vector3[] vertices;
+    int[] triangles;
 
 
     // Use this for initialization
@@ -22,6 +18,13 @@ public class Hello_Triangle : MonoBehaviour
         gameObject.AddComponent<MeshFilter>();
         gameObject.AddComponent<MeshRenderer>();
 
+        Mesh msh = new Mesh();
+
+        msh.vertices = vertices;
+        msh.triangles = triangles;
+
+        gameObject.GetComponent<MeshFilter>().mesh = msh;
+        gameObject.GetComponent<MeshRenderer>().material = mat;
 
         // plan(4, 3);
 
@@ -31,16 +34,8 @@ public class Hello_Triangle : MonoBehaviour
 
         //cone(new Vector3(0, 0, 0), 3, 20, 5);
 
-        //sphere(new Vector3(0, 0, 0), 4, 8);
-        sphere_mat(rayon, nparallele, nmeridien, ntronc);
+        sphere(50, 50, 10);
 
-        Mesh msh = new Mesh();
-
-        msh.vertices = vertices;
-        msh.triangles = triangles;
-
-        gameObject.GetComponent<MeshFilter>().mesh = msh;
-        gameObject.GetComponent<MeshRenderer>().material = mat;
 
 
     }
@@ -121,7 +116,6 @@ public class Hello_Triangle : MonoBehaviour
 
     void cylindre(Vector3 c, float r, int edges, float height){
 
-        // int     void circle(Vector3 c, int r, int edges){
         int rotate = 360 / edges;
         vertices = new Vector3[2* (edges + 1)];
         triangles = new int[ 12*edges];
@@ -184,52 +178,63 @@ public class Hello_Triangle : MonoBehaviour
 
     }
 
-    void sphere(Vector3 c, float r, int edges){
+    private void sphere(int edges, int layers, int tronc)
+    {
+        tronc = layers - tronc;
+
+        vertices = new Vector3[(tronc + 1) * (edges + 1) + 1];
+        triangles = new int[(tronc * edges * 2 + 2 * edges) * 3];
 
 
-
-        float rotate1 = 360 / edges;
-        float rotate2 = 360 / edges;
-        vertices = new Vector3[edges * edges + 1];
-        triangles = new int[ 15*edges];
-
-        int start = 0;
-        float teta = 0;
-        float phi = 0;
-
-        vertices[0] = c;
-        int inc = 0;
-        for (int j = 0; j < edges; j++){
-            for (int i = 1; i <= edges; i++)
+        int index = 0;
+        vertices[(tronc + 1) * (edges + 1)] = new Vector3(0, 0, 0);
+        for (int i = 0; i <= edges; i++)
+        {
+            float ang_1 = -Mathf.PI / 2 + i * Mathf.PI / edges;
+            for (int j = 0; j <= tronc; j++)
             {
-                vertices[i+inc] = new Vector3(r * (float)Math.Sin(phi * Math.PI / 180) * (float)Math.Cos(teta * Math.PI / 180) ,
-                                                r * (float)Math.Sin(phi * Math.PI / 180) * (float)Math.Sin(teta * Math.PI / 180),
-                                                r * (float)Math.Cos(phi * Math.PI / 180));
-                teta += rotate1;
+                float ang_2 = j * 2 * Mathf.PI / layers;
+
+                float x = Mathf.Cos(ang_2) * Mathf.Cos(ang_1);
+                float y = Mathf.Sin(ang_2) * Mathf.Cos(ang_1);
+                float z = Mathf.Sin(ang_1);
+
+                vertices[index] = new Vector3(x, y, z);
+                index++;
             }
-            inc += edges;
-            phi += rotate2;
         }
 
-        int tri = start;
+        int k = 0;
+        //for (int j = 0; j < edges; j++)
+        //{
+        //    int r1 = j * (tronc + 1);
+        //    int r2 = (j + 1) * (tronc + 1);
+        //    for (int i = 0; i < tronc; i++)
+        //    {
+        //        triangles[k] = r1 + i;
+        //        triangles[k + 1] = r2 + i + 1;
+        //        triangles[k + 2] = r2 + i;
 
-        triangles[0] = 0;
-        triangles[1] = 1;
-        triangles[2] = 2;
+        //        triangles[k + 3] = r1 + i;
+        //        triangles[k + 4] = r1 + i + 1;
+        //        triangles[k + 5] = r2 + i + 1;
 
-        // for (int i = 1; i < edges; i++)
-        // {
-        //     triangles[tri] = 0;
-        //     triangles[tri+1] = i + 1;
-        //     triangles[tri+2] = i;
+        //        k += 6;
+        //    }
+        //}
 
-        // tri += 3;
-        // }
+        //for (int i = 0; i < edges; i++)
+        //{
 
-        // triangles[tri] = start;
-        // triangles[tri+1] = start + 1;
-        // triangles[tri+2] = edges;
+        //    triangles[k++] = (i * (tronc + 1)) + tronc + 1;
+        //    triangles[k++] = ((tronc + 1) * (edges + 1));
+        //    triangles[k++] = (i * (tronc + 1));
 
+        //    triangles[k++] = ((i * (tronc + 1))) + tronc;
+        //    triangles[k++] = ((tronc + 1) * (edges + 1));
+        //    triangles[k++] = ((i * (tronc + 1)) + tronc + 1) + tronc;
+
+        //}
 
 
     }
@@ -273,91 +278,5 @@ public class Hello_Triangle : MonoBehaviour
         triangles[tri+5] = edges;
 
     }
-
-
-    void sphere_mat(int r, int p, int m, int t)
-    {
-
-        const float PI = 3.1415926f;
-        int rayon = r, nparallele = p, nmeridien = m, ntronc = t;
-        int[] triangles;
-        Vector3[] vertices;
-        Material mat;
-
-        ntronc = nmeridien - ntronc;
-        // Création des structures de données qui accueilleront sommets et  triangles  // Remplissage de la structure sommet 
-
-        vertices = new Vector3[(ntronc + 1) * (nparallele + 1) + 1];
-        triangles = new int[(ntronc * nparallele * 2 + 2 * nparallele) * 3];
-
-
-        int index = 0;
-        vertices[(ntronc + 1) * (nparallele + 1)] = new Vector3(0, 0, 0);
-        for (int i = 0; i <= nparallele; i++)
-        {
-            float phi = -PI / 2 + i * PI / nparallele;
-            for (int j = 0; j <= ntronc; j++)
-            {
-                float teta = j * 2 * PI / nmeridien;
-
-                float x = Mathf.Cos(teta) * Mathf.Cos(phi);
-                float y = Mathf.Sin(teta) * Mathf.Cos(phi);
-                float z = Mathf.Sin(phi);
-
-                vertices[index] = new Vector3(x, y, z);
-                index++;
-            }
-        }
-
-        int k = 0;
-        for (int j = 0; j < nparallele; j++)
-        {
-            int r1 = j * (ntronc + 1);
-            int r2 = (j + 1) * (ntronc + 1);
-            for (int i = 0; i < ntronc; i++)
-            {
-                triangles[k] = r1 + i;
-                triangles[k + 1] = r2 + i + 1;
-                triangles[k + 2] = r2 + i;
-
-                triangles[k + 3] = r1 + i;
-                triangles[k + 4] = r1 + i + 1;
-                triangles[k + 5] = r2 + i + 1;
-
-                k += 6;
-            }
-        }
-
-        for (int i = 0; i < nparallele; i++)
-        {
-
-            triangles[k++] = (i * (ntronc + 1)) + ntronc + 1;
-            triangles[k++] = ((ntronc + 1) * (nparallele + 1)); // ok
-            triangles[k++] = (i * (ntronc + 1));
-
-            triangles[k++] = ((i * (ntronc + 1))) + ntronc;
-            triangles[k++] = ((ntronc + 1) * (nparallele + 1)); // ok
-            triangles[k++] = ((i * (ntronc + 1)) + ntronc + 1) + ntronc;
-
-
-
-
-        }
-
-
-    }
-
-    private void OnDrawGizmos()
-    {
-        if (vertices == null) return;
-        // DrawSphere();
-        Gizmos.color = Color.black;
-        foreach (var point in vertices)
-        {
-            Gizmos.DrawSphere(point, 0.1f);
-        }
-    }
-
-    
 
 }
