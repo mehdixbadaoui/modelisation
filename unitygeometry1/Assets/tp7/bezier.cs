@@ -37,34 +37,34 @@ public class bezier : MonoBehaviour
     private void Update()
     {
 
-        if (Input.GetKey(KeyCode.Keypad1))
+        if (Input.GetKey(KeyCode.Keypad1) || Input.GetKey(KeyCode.Alpha1))
         {
             tomove = p0;
             updateCircle();
             circle.GetComponent<SpriteRenderer>().color = Color.red;
         }
 
-        if (Input.GetKey(KeyCode.Keypad2))
+        if (Input.GetKey(KeyCode.Keypad2) || Input.GetKey(KeyCode.Alpha2))
         {
             tomove = p1;
             updateCircle();
             circle.GetComponent<SpriteRenderer>().color = Color.red;
         }
 
-        if (Input.GetKey(KeyCode.Keypad3))
+        if (Input.GetKey(KeyCode.Keypad3) || Input.GetKey(KeyCode.Alpha3))
         {
             tomove = p2;
             updateCircle();
             circle.GetComponent<SpriteRenderer>().color = Color.red;
         }
 
-        if (Input.GetKey(KeyCode.Keypad4))
+        if (Input.GetKey(KeyCode.Keypad4) || Input.GetKey(KeyCode.Alpha4))
         {
             tomove = p3;
             updateCircle();
             circle.GetComponent<SpriteRenderer>().color = Color.red;
         }
-        if (Input.GetKey(KeyCode.Keypad5))
+        if (Input.GetKey(KeyCode.Keypad5) || Input.GetKey(KeyCode.Alpha5))
         {
             tomove = Vector3.zero;
             updateCircle();
