@@ -31,12 +31,11 @@ public class build : MonoBehaviour
         Vector3 newPos = transform.position;
         newPos.y += height_offste;
 
-        GameObject go = bottom[UnityEngine.Random.Range(0, bottom.Length)];
-        Instantiate(go, newPos , Quaternion.identity);
-        //collider = go.AddComponent<Collider>();
+        GameObject prefab = bottom[UnityEngine.Random.Range(0, bottom.Length)];
+        GameObject go = Instantiate(prefab, newPos, Quaternion.identity) as GameObject;
+        go.transform.SetParent(transform);
 
-        //height_offste += go.GetComponent<Collider>().bounds.size.y;
-        height_offste += go.GetComponentInChildren<MeshRenderer>().bounds.size.y;
+        height_offste += prefab.GetComponentInChildren<MeshRenderer>().bounds.size.y;
     }
 
     private void buildMiddle()
@@ -44,13 +43,11 @@ public class build : MonoBehaviour
         Vector3 newPos = transform.position;
         newPos.y += height_offste;
 
-        GameObject go = middle[UnityEngine.Random.Range(0, middle.Length)];
-        Instantiate(go, newPos, Quaternion.identity);
+        GameObject prefab = middle[UnityEngine.Random.Range(0, middle.Length)];
+        GameObject go = Instantiate(prefab, newPos, Quaternion.identity) as GameObject;
+        go.transform.SetParent(transform);
 
-        //collider = go.AddComponent<Collider>();
-
-        //height_offste += go.GetComponent<Collider>().bounds.size.y;
-        height_offste += go.GetComponentInChildren<MeshRenderer>().bounds.size.y;
+        height_offste += prefab.GetComponentInChildren<MeshRenderer>().bounds.size.y;
     }
 
     private void buildTop()
@@ -58,12 +55,11 @@ public class build : MonoBehaviour
         Vector3 newPos = transform.position;
         newPos.y += height_offste;
 
-        GameObject go = top[UnityEngine.Random.Range(0, top.Length)];
-        Instantiate(go, newPos, Quaternion.identity);
-        //collider = go.AddComponent<Collider>();
+        GameObject prefab = top[UnityEngine.Random.Range(0, top.Length)];
+        GameObject go = Instantiate(prefab, newPos, Quaternion.identity) as GameObject;
+        go.transform.SetParent(transform);
 
-        //height_offste += go.GetComponent<Collider>().bounds.size.y;
-        height_offste += go.GetComponentInChildren<MeshRenderer>().bounds.size.y;
+        height_offste += prefab.GetComponentInChildren<MeshRenderer>().bounds.size.y;
     }
 
 }
