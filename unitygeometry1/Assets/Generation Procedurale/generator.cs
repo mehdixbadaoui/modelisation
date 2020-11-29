@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class generator : MonoBehaviour
 {
-    public int width, height;
+    public int width = 10;
+    public int height = 10;
 
     [Range(10f, 100f)]
     public float scale = 20f;
@@ -19,17 +20,18 @@ public class generator : MonoBehaviour
     void Start()
     {
         GameObject go;
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < width; i++)
         {
-            for (int j = 0; j < 10; j++)
+            for (int j = 0; j < height; j++)
             {
                 building_height = calc_height(i, j);
+                Debug.Log(building_height);
 
                 Vector3 new_pos = new Vector3(i, transform.position.y, j);
                 go = Instantiate(building, new_pos, Quaternion.identity);
                 go.transform.SetParent(transform);
-                go.GetComponent<build>().stories = Mathf.FloorToInt(building_height * 100);
-                Debug.Log(go.GetComponent<build>().stories);
+
+                go.GetComponent<build>().stories = Mathf.FloorToInt(building_height * 10);
                 go.GetComponent<build>().Build();
 
             }
