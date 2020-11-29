@@ -9,23 +9,26 @@ public class build : MonoBehaviour
     public GameObject[] middle;
     public GameObject[] top;
 
-    Collider collider;
     
     float height_offste;
-    // Start is called before the first frame update
+    public int stories { get; set; }
     void Start()
+    {
+        //Build();
+    }
+
+    public void Build()
     {
         height_offste = 0;
         buildBottom();
-        int stories = UnityEngine.Random.Range(0, 10);
         for (int i = 0; i < stories; i++)
         {
             buildMiddle();
 
         }
         buildTop();
-    }
 
+    }
     private void buildBottom()
     {
         Vector3 newPos = transform.position;
