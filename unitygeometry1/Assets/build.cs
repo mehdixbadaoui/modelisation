@@ -17,7 +17,12 @@ public class build : MonoBehaviour
     {
         height_offste = 0;
         buildBottom();
-        buildMidle();
+        int stories = UnityEngine.Random.Range(0, 10);
+        for (int i = 0; i < stories; i++)
+        {
+            buildMiddle();
+
+        }
         buildTop();
     }
 
@@ -34,7 +39,7 @@ public class build : MonoBehaviour
         height_offste += go.GetComponentInChildren<MeshRenderer>().bounds.size.y;
     }
 
-    private void buildMidle()
+    private void buildMiddle()
     {
         Vector3 newPos = transform.position;
         newPos.y += height_offste;
